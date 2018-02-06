@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');body {
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    background-color: #fc5c7d;
+    background: -webkit-gradient(linear, left top, right top, from(#fc5c7d), to(#6a82fb));
+    background: linear-gradient(to right, #fc5c7d, #6a82fb);
+}.form {
+    
+    width: 460px;
+    height: 720px;
+    background-color: #e6e6e6;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 0 40px -10px #000;
+            box-shadow: 0 0 40px -10px #000;
+    margin: calc(30vh - 220px) auto;
+    padding: 20px 30px;
+    max-width: calc(100vw - 40px);
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    position: relative;
+}.form__title {
+        
+        margin: 10px 0;
+        padding-bottom: 10px;
+        width: 250px;
+        color: #78788c;
+        border-bottom: 3px solid #78788c;
+    }.form__label {
+        
+        display: block;
+        margin: 18px 0 0;
+        font-size: .875rem;
+        color: #5a5a5a;
+    }.form__input--text {
+        
+        display: block;
+        width: 100%;
+        padding: 8px;
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        background: none;
+        outline: none;
+        resize: none;
+        border: 0;
+        -webkit-transition: all .3s ease-out;
+        transition: all .3s ease-out;
+        border-bottom: 2px solid #bebed2;
+    }.form__input--text:focus {
+        
+        border-bottom: 2px solid #78788c;
+    }.form__input--radio {
+        
+        color: #5a5a5a;
+        font-size: .875rem;
+        padding: 8px;
+    }.form__button {
+        display: block;
+        width: 140px;
+        padding: 8px 12px;
+        margin: 25px auto;
+        border: 2px solid #78788c;
+        background: 0;
+        color: #5a5a6e;
+        cursor: pointer;
+        -webkit-transition: all .3s ease-out;
+        transition: all .3s ease-out;
+    }.form__button:hover {
+        
+        background-color: #78788c;
+        color: #FFF;
+    }

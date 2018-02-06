@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link href="temp/styles/styles.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+   
+   <form class="form">
+        <h2 class="form__title">Φόρμα Εγγραφής</h2>
+        <label class="form__label" for="fullname">Ονοματεπώνυμο: *</label>
+        <input class="form__input--text" type="text" name="fullName" placeholder="Πληκτρολογίστε το ονοματεπώνυμο σας">
+        <label class="form__label" for="gender">Φύλλο: *</label>
+        <input type="radio" name="gender" value="male"><span class="form__input--radio" >'Ανδρας</span>
+        <input type="radio" name="gender" value="female"><span class="form__input--radio">Γυναίκα</span>
+        <input type="radio" name="gender" value="other"><span class="form__input--radio">'Αλλο</span>
+        <label class="form__label" for="email">E-mail: *</label>
+        <input class="form__input--text" type="text" name="email" placeholder="Πληκτρολογίστε το e-mail σας">
+        <label class="form__label" for="email2">Επιβεβαίωση E-mail: *</label>
+        <input class="form__input--text" type="text" name="email2" placeholder="Πληκτρολογίστε ξανά το e-mail σας">
+        <label class="form__label" for="phone1">Τηλέφωνο: *</label>
+        <input class="form__input--text" type="text" name="phone1" placeholder="Πληκτρολογίστε τον αριθμό του τηλεφώνου σας">
+        <label class="form__label" for="phone2">Κινητό: </label>
+        <input class="form__input--text" type="text" name="phone2" placeholder="Πληκτρολογίστε τον αριθμό του κινητού σας">
+        <label class="form__label" for="address">Διεύθυνση: *</label>
+        <input class="form__input--text" type="text" name="address" placeholder="Πληκτρολογίστε την διεύθυνση σας">
+        <label class="form__label" for="city">Πόλη: </label>
+        <input class="form__input--text" type="text" name="city" placeholder="Πληκτρολογίστε την πόλη σας">
+        <button class="form__button">Εγγραφή</button>
+   </form>
+    
+</body>
+</html>
