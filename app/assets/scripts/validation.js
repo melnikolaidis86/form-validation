@@ -1,31 +1,33 @@
-function validateText (inputField, inputValue, minValue, maxValue, regex=null) {
+function Validation (inputField, fieldValue, fieldMinLength, fieldMaxLength, fieldRegex=null) {
     
-    var inputErrorsArray = new Array();
+    this.value = fieldValue;
     
-    if (inputValue.length < minValue) {
-        
-        inputErrorsArray.push('Παρακαλούμε, το πεδίο ' + inputField + ' δεν μπορεί να περιέχει λιγότερους από ' + minValue + ' χαρακτήρες.');
+    this.errors = {
+
+        minLengthError: '',
+        maxLengthError: '',
+        regexError: ''
     }
     
-    if (inputValue.length > maxValue) {
+    this.validateText = function () {
         
-        inputErrorsArray.push('Παρακαλούμε, το πεδίο ' + inputField + ' δεν μπορεί να υπερβαίνει τους ' + maxValue + ' χαρακτήρες.');
-    }
-    
-    if(regex != null) {
-        
-        if(!regex.test(inputField)) {
+        if(this.value.length < fieldMinLength) {
             
-            inputErrorsArray.push('Παρακαλούμε είσαγετε μια έγκυρη μορφή για το πεδίο ' + inputField + '.');
+            this.errors.minLengthError = 'Παρακαλούμε, το πεδιο ' + inputField + ' πρέπει να περιέχει τουλάχιστον ' + fieldMinLength + ' χαρακτήρες.';
         }
+        
+        if(this.value.length > fieldMaxLength) {
+            
+            this.errors.maxLengthError = 'Παρακαλούμε, το πεδιο ' + inputField + ' δεν πρέπει να υπερβαίνει τους ' + fieldMaxLength + ' χαρακτήρες.';
+        }
+        
+        if(fieldRegex != null) {
+            
+            if(!fieldRegex.test(this.value)) {
+                this.errors.regexError = 'Συμπληρώστε μία έγκυρη μορφή για το πεδίο ' + inputField; 
+            }
+        }
+        
+        return this.errors;
     }
-    
-    return inputErrorsArray;
-}
-
-var fullNameField = document.getElementById('form').fullName;
-
-fullNameField.onblur = function () {
-     
-    alert(validateText('Ονοματεπώνυμο', fullNameField.value, 3, 12));
 }
