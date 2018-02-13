@@ -30,4 +30,20 @@ function Validation (inputField, fieldValue, fieldMinLength, fieldMaxLength, fie
         
         return this.errors;
     }
+    
+    this.displayErrorMessage = function () {
+        
+        if(this.errors.minLengthError.length > 1) {
+            
+            console.log(this.errors.minLengthError);
+        }
+        if(this.errors.maxLengthError.length > 1) {
+            
+            console.log(this.errors.minLengthError);
+        }
+        if(this.errors.regexError.length > 1) {
+            
+            console.log(this.errors.minLengthError);
+        }
+    }
 }
