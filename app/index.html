@@ -10,15 +10,15 @@
    
    <form class="form" id="form">
         <h2 class="form__title">Φόρμα Εγγραφής</h2>
-        <label class="form__label" for="fullName">Ονοματεπώνυμο: *<span class="form__label--errors"></span></label>
+        <label class="form__label" for="fullName">Ονοματεπώνυμο: *<span id="fullNameError" class="form__label--errors"></span></label>
         <input class="form__input--text" type="text" name="fullName" placeholder="Πληκτρολογίστε το ονοματεπώνυμο σας">
         <label class="form__label" for="gender">Φύλλο: *</label>
         <input type="radio" name="gender" value="male"><span class="form__input--radio" >'Ανδρας</span>
         <input type="radio" name="gender" value="female"><span class="form__input--radio">Γυναίκα</span>
         <input type="radio" name="gender" value="other"><span class="form__input--radio">'Αλλο</span>
-        <label class="form__label" for="email">E-mail: *</label>
+        <label class="form__label" for="email">E-mail: *<span id="emailError" class="form__label--errors"></span></label>
         <input class="form__input--text" type="text" name="email" placeholder="Πληκτρολογίστε το e-mail σας">
-        <label class="form__label" for="email2">Επιβεβαίωση E-mail: *</label>
+        <label class="form__label" for="email2">Επιβεβαίωση E-mail: *<span id="email2Error" class="form__label--errors"></span></label>
         <input class="form__input--text" type="text" name="email2" placeholder="Πληκτρολογίστε ξανά το e-mail σας">
         <label class="form__label" for="phone1">Τηλέφωνο: *</label>
         <input class="form__input--text" type="text" name="phone1" placeholder="Πληκτρολογίστε τον αριθμό του τηλεφώνου σας">

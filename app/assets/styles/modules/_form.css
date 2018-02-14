@@ -26,6 +26,12 @@
         margin: 18px 0 0;
         font-size: .875rem;
         color: $form-main-text-color;
+        
+        &--errors {
+            
+            font-size: .725rem;
+            color: $main-background-color;
+        }
     }
     
     &__input--text {

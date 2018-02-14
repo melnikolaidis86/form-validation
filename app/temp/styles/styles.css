@@ -31,7 +31,11 @@
         margin: 18px 0 0;
         font-size: .875rem;
         color: #5a5a5a;
-    }.form__input--text {
+    }.form__label--errors {
+            
+            font-size: .725rem;
+            color: #fc5c7d;
+        }.form__input--text {
         
         display: block;
         width: 100%;
