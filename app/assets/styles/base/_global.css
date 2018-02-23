@@ -6,3 +6,25 @@ body {
     background-color: $main-background-color;
     background: $main-background-gradient;
 }
+
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background: 0;
+    display: block;
+    width: 140px;
+    padding: 8px 12px;
+    margin: 25px auto;
+    border: 2px solid $form-secondary-color;
+    color: $form-button-color;
+    cursor: pointer;
+    transition: all .3s ease-out;
+
+    &:hover {
+        background-color: $form-secondary-color;
+        color: #FFF;  
+    }
+}

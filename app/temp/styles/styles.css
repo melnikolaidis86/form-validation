@@ -4,9 +4,26 @@
     background-color: #fc5c7d;
     background: -webkit-gradient(linear, left top, right top, from(#fc5c7d), to(#6a82fb));
     background: linear-gradient(to right, #fc5c7d, #6a82fb);
-}.form {
+}h2 {
+    margin: 0;
+    padding: 0;
+}button {
+    background: 0;
+    display: block;
+    width: 140px;
+    padding: 8px 12px;
+    margin: 25px auto;
+    border: 2px solid #78788c;
+    color: #5a5a6e;
+    cursor: pointer;
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}button:hover {
+        background-color: #78788c;
+        color: #FFF;  
+    }.form-block {
     
-    width: 460px;
+    width: 560px;
     height: 720px;
     background-color: #e6e6e6;
     border-radius: 8px;
@@ -18,24 +35,25 @@
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
     position: relative;
-}.form__title {
+    
+}.form-block__form-title {
         
         margin: 10px 0;
         padding-bottom: 10px;
         width: 250px;
         color: #78788c;
         border-bottom: 3px solid #78788c;
-    }.form__label {
+    }.form-field__label {
         
         display: block;
         margin: 18px 0 0;
         font-size: .875rem;
         color: #5a5a5a;
-    }.form__label--errors {
+    }.form-field__label--errors {
             
             font-size: .725rem;
             color: #fc5c7d;
-        }.form__input--text {
+        }.form-field__input--text {
         
         display: block;
         width: 100%;
@@ -49,27 +67,11 @@
         -webkit-transition: all .3s ease-out;
         transition: all .3s ease-out;
         border-bottom: 2px solid #bebed2;
-    }.form__input--text:focus {
-        
-        border-bottom: 2px solid #78788c;
-    }.form__input--radio {
+    }.form-field__input--text:focus {
+            border-bottom: 2px solid #78788c;  
+        }.form-field__input--radio {
         
         color: #5a5a5a;
         font-size: .875rem;
         padding: 8px;
-    }.form__button {
-        display: block;
-        width: 140px;
-        padding: 8px 12px;
-        margin: 25px auto;
-        border: 2px solid #78788c;
-        background: 0;
-        color: #5a5a6e;
-        cursor: pointer;
-        -webkit-transition: all .3s ease-out;
-        transition: all .3s ease-out;
-    }.form__button:hover {
-        
-        background-color: #78788c;
-        color: #FFF;
     }

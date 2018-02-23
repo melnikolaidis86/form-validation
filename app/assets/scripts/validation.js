@@ -1,10 +1,26 @@
+// Fields that need validation
 var form = document.getElementById('form'),
     fullNameField = form.fullName,
     emailField = form.email;
 
+// Button that submits the form when clicked
 var submitButton = document.getElementById('submitButton');
 
-submitButton.addEventListener('click', function() {
+// A validation run for full name triggered on blur
+fullNameField.addEventListener('blur', function() {
+    
+    var errorSpan = document.getElementById('fullNameError');
+    
+    fullNameValidation = new Validation('ονοματεπώνυμο', fullNameField.value, {
+        required: true,
+        minLength: 5,
+        maxLength: 30
+    });
+    
+    errorSpan.innerHTML = fullNameValidation.validate();
+});
+
+/*submitButton.addEventListener('click', function() {
     formErrors = new Array();
     fieldsRequired = [
         fullNameValidation = new Validation('Ονοματεπώνυμο', fullNameField.value, {required: true, maxLength: 30}),
@@ -26,9 +42,10 @@ submitButton.addEventListener('click', function() {
             console.log(formErrors[error]);
         }
     }
-});
+});*/
 
 
+// Validation object that validates a field based on some validation rules
 function Validation (validationField, validationFieldValue, validationRules = {required: false, minLength: null, maxLength: null, regex: null}) {
     
     this.field = validationField;
@@ -45,30 +62,27 @@ function Validation (validationField, validationFieldValue, validationRules = {r
     
     this.validate = function () {
         
-        var errors = new Array();
+        var error = '';
         
-        if(this.rules.required == true && this.rules.minLength == null && this.fieldValue.trim() == '') {
-            errors.push(this.messages.requiredMessage); 
-        }
-        
-        if(this.rules.minLength != null && this.fieldValue.length < this.rules.minLength) {
-            errors.push(this.messages.minLengthMessage);
-        }
-        
-        if(this.rules.maxLength != null && this.fieldValue.length > this.rules.maxLength) {
-            errors.push(this.messages.maxLength);
-        }
-        
-        if(this.rules.regex != null && this.fieldValue.trim() != '') {
+        if(this.rules.required == true && this.fieldValue.trim() == '') {
+            
+            error = this.messages.requiredMessage; 
+        } else if (this.rules.minLength != null && this.fieldValue.length < this.rules.minLength) {
+            
+            error = this.messages.minLengthMessage;
+        } else if (this.rules.maxLength != null && this.fieldValue.length > this.rules.maxLength) {
+            
+            error = this.messages.maxLengthMessage;
+        } else if (this.rules.regex != null && this.fieldValue != '') {
             
             if(!this.rules.regex.test(this.fieldValue)) {
                 
-                errors.push(this.messages.regexMessage);
+              error = this.messages.regexMessage;  
             }
         }
-    
             
-        return errors;
+            
+        return error;
     
     }
     
