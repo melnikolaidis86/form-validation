@@ -10,6 +10,7 @@
         &--errors {
             
             font-size: .725rem;
+            margin-left: 10px;
             color: $main-background-color;
         }
     }

@@ -1,7 +1,10 @@
 // Fields that need validation
 var form = document.getElementById('form'),
     fullNameField = form.fullName,
-    emailField = form.email;
+    emailField = form.email,
+    emailField2 = form.email2,
+    phoneField = form.phone1,
+    addressField = form.address;
 
 // Button that submits the form when clicked
 var submitButton = document.getElementById('submitButton');
@@ -20,11 +23,71 @@ fullNameField.addEventListener('blur', function() {
     errorSpan.innerHTML = fullNameValidation.validate();
 });
 
-/*submitButton.addEventListener('click', function() {
+// A validation run for email triggered on blur 
+emailField.addEventListener('blur', function() {
+   
+    var errorSpan = document.getElementById('emailError');
+    
+    emailValidation = new Validation('e-mail', emailField.value, {
+        required: true,
+        regex: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    })
+    
+    errorSpan.innerHTML = emailValidation.validate();
+});
+
+// A validation that checks the previous email if it is the same
+emailField2.addEventListener('blur', function() {
+    
+    var errorSpan = document.getElementById('email2Error');
+    
+    emailField = form.email;
+    emailField2 = form.email2;
+    
+    if(emailField2.value != emailField.value) {
+        
+        errorSpan.innerHTML = 'Το πεδίο δεν ταιριάζει με το πεδίο e-mail που πληκτρολογήσατε παραπάνω.';
+    } else {
+        
+        errorSpan.innerHTML = '';
+    }
+});
+
+// A validation run for phone1 triggered on blur 
+phoneField.addEventListener('blur', function() {
+   
+    var errorSpan = document.getElementById('phoneError');
+    
+    phoneValidation = new Validation('τηλέφωνο', phoneField.value, {
+        required: true,
+        maxLength: 13,
+        regex: /^\d{3}\d{7}$/
+    })
+    
+    errorSpan.innerHTML = phoneValidation.validate();
+});
+
+// A validation run for address triggered on blur 
+addressField.addEventListener('blur', function() {
+   
+    var errorSpan = document.getElementById('addressError');
+    
+    addressFieldValidation = new Validation('διεύθυνση', addressField.value, {
+        required: true,
+        minLength: 5,
+        maxLength: 30
+    })
+    
+    errorSpan.innerHTML = addressFieldValidation.validate();
+});
+
+submitButton.addEventListener('click', function() {
     formErrors = new Array();
     fieldsRequired = [
         fullNameValidation = new Validation('Ονοματεπώνυμο', fullNameField.value, {required: true, maxLength: 30}),
-        emailValidation = new Validation('E-mail', emailField.value, {required: true, regex: /foo/})
+        emailValidation = new Validation('E-mail', emailField.value, {required: true, regex: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/}),
+        phoneValidation = new Validation('τηλέφωνο', phoneField.value, {required: true, maxLength: 13, regex: /^\d{3}\d{7}$/}),
+        addressFieldValidation = new Validation('διεύθυνση', addressField.value, {required: true, minLength: 5, maxLength: 30})
     ];
     
     for(i = 0; i < fieldsRequired.length; i++) {
@@ -42,7 +105,7 @@ fullNameField.addEventListener('blur', function() {
             console.log(formErrors[error]);
         }
     }
-});*/
+});
 
 
 // Validation object that validates a field based on some validation rules

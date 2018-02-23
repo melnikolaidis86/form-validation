@@ -52,6 +52,7 @@
     }.form-field__label--errors {
             
             font-size: .725rem;
+            margin-left: 10px;
             color: #fc5c7d;
         }.form-field__input--text {
         
