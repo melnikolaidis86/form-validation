@@ -3,6 +3,7 @@ var form = document.getElementById('form'),
     fullNameField = form.fullName,
     emailField = form.email,
     emailField2 = form.email2,
+    passwordField = form.password1,
     phoneField = form.phone1,
     addressField = form.address;
 
@@ -17,7 +18,8 @@ fullNameField.addEventListener('blur', function() {
     fullNameValidation = new Validation('ονοματεπώνυμο', fullNameField.value, {
         required: true,
         minLength: 5,
-        maxLength: 30
+        maxLength: 30,
+        regex: /[A-Z]/
     });
     
     errorSpan.innerHTML = fullNameValidation.validate();
@@ -31,7 +33,7 @@ emailField.addEventListener('blur', function() {
     emailValidation = new Validation('e-mail', emailField.value, {
         required: true,
         regex: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    })
+    });
     
     errorSpan.innerHTML = emailValidation.validate();
 });
@@ -53,6 +55,21 @@ emailField2.addEventListener('blur', function() {
     }
 });
 
+// A validation run for password triggered on blur
+passwordField.addEventListener('blur', function () {
+
+    var errorSpan = document.getElementById('password1Error');
+
+    passwordValidation = new Validation('κωδικός πρόσβασης', passwordField.value, {
+        required: true,
+        minLength: 8,
+        maxLength: 30
+    });
+
+    errorSpan.innerHTML = passwordValidation.validate();
+});
+
+
 // A validation run for phone1 triggered on blur 
 phoneField.addEventListener('blur', function() {
    
@@ -62,7 +79,7 @@ phoneField.addEventListener('blur', function() {
         required: true,
         maxLength: 13,
         regex: /^\d{3}\d{7}$/
-    })
+    });
     
     errorSpan.innerHTML = phoneValidation.validate();
 });
@@ -75,8 +92,9 @@ addressField.addEventListener('blur', function() {
     addressFieldValidation = new Validation('διεύθυνση', addressField.value, {
         required: true,
         minLength: 5,
-        maxLength: 30
-    })
+        maxLength: 30,
+    regex: /^(?=.*[A-Za-z])(?=.*\s)(?=.*\d)/ 
+    });
     
     errorSpan.innerHTML = addressFieldValidation.validate();
 });
@@ -109,7 +127,7 @@ submitButton.addEventListener('click', function() {
 
 
 // Validation object that validates a field based on some validation rules
-function Validation (validationField, validationFieldValue, validationRules = {required: false, minLength: null, maxLength: null, regex: null}) {
+function Validation (validationField, validationFieldValue, validationRules = {required: false, minLength: null, maxLength: null, regex: null, passwordStrength: false}) {
     
     this.field = validationField;
     this.fieldValue = validationFieldValue;
@@ -143,10 +161,30 @@ function Validation (validationField, validationFieldValue, validationRules = {r
               error = this.messages.regexMessage;  
             }
         }
-            
-            
+              
         return error;
     
     }
-    
+
+    this.checkPasswordStrength = function() {
+
+        if(this.rules.passwordStrength == true) {
+
+            var tests = {
+                medium: /^(?=.*[A-Za-z])(?=.*\d)/,
+                high: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])/,
+                perfect: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])/
+            }
+
+            if (tests.perfect.test(this.fieldValue)) {
+                console.log('perfect');
+            } else if (tests.high.test(this.fieldValue)) {
+                console.log('high');
+            } else if (tests.medium.test(this.fieldValue)) {
+                console.log('medium');
+            } else {
+                console.log('weak');
+            }
+        }
+    }    
 }

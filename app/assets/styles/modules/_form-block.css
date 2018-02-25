@@ -1,11 +1,11 @@
 .form-block {
     
     width: 560px;
-    height: 720px;
+    height: auto;
     background-color: $form-background-color;
     border-radius: 8px;
     box-shadow: 0 0 40px -10px #000;
-    margin: calc(30vh - 220px) auto;
+    margin: 30px auto;
     padding: 20px 30px;
     max-width: calc(100vw - 40px);
     box-sizing: border-box;
