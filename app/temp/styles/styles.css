@@ -78,4 +78,6 @@
     }.form-field__password-strength {
         color: #5a5a5a;
         font-size: .875rem;
-    }
+    }.form-field__password-strength span {
+            font-weight: bold; 
+        }

@@ -43,5 +43,9 @@
     &__password-strength {
         color: $form-main-text-color;
         font-size: .875rem;
+
+        span {
+            font-weight: bold; 
+        }
     }
 }

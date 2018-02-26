@@ -20,7 +20,7 @@ fullNameField.addEventListener('blur', function() {
         required: true,
         minLength: 5,
         maxLength: 30,
-        regex: /[A-Z]/
+        regex: /^[a-zA-Zα-ωΑ-Ω\s]*$/ // accepts only String Characters english and greek
     });
     
     errorSpan.innerHTML = fullNameValidation.validate();
@@ -33,7 +33,7 @@ emailField.addEventListener('blur', function() {
     
     emailValidation = new Validation('e-mail', emailField.value, {
         required: true,
-        regex: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        regex: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ // a regular expression that checks for a valid e-mail address
     });
     
     errorSpan.innerHTML = emailValidation.validate();
@@ -107,7 +107,7 @@ phoneField.addEventListener('blur', function() {
     phoneValidation = new Validation('τηλέφωνο', phoneField.value, {
         required: true,
         maxLength: 13,
-        regex: /^\d{3}\d{7}$/
+        regex: /^\d{3}\d{7}$/ //accepts only 10 numeric characters
     });
     
     errorSpan.innerHTML = phoneValidation.validate();
@@ -122,20 +122,21 @@ addressField.addEventListener('blur', function() {
         required: true,
         minLength: 5,
         maxLength: 30,
-    regex: /^(?=.*[A-Za-z])(?=.*\s)(?=.*\d)/ 
+        regex: /^[A-Za-zΑ-Ωα-ω](?=.*[A-Za-zΑ-Ωα-ω])(?=.*\s)(?=.*\d)/ // checks for string characters as well as at least a numeric character and a whitespace
     });
     
     errorSpan.innerHTML = addressFieldValidation.validate();
 });
 
-/*
+// A validation run on all required fields when the submit button is clicked
 submitButton.addEventListener('click', function() {
     formErrors = new Array();
     fieldsRequired = [
-        fullNameValidation = new Validation('Ονοματεπώνυμο', fullNameField.value, {required: true, maxLength: 30}),
+        fullNameValidation = new Validation('Ονοματεπώνυμο', fullNameField.value, {required: true, minLength: 5, maxLength: 30, regex: /^[a-zA-Zα-ωΑ-Ω\s]*$/}),
         emailValidation = new Validation('E-mail', emailField.value, {required: true, regex: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/}),
+        passwordValidation = new Validation('κωδικός πρόσβασης', passwordField1.value, {required: true, minLength: 8, maxLength: 30}),
         phoneValidation = new Validation('τηλέφωνο', phoneField.value, {required: true, maxLength: 13, regex: /^\d{3}\d{7}$/}),
-        addressFieldValidation = new Validation('διεύθυνση', addressField.value, {required: true, minLength: 5, maxLength: 30})
+        addressFieldValidation = new Validation('διεύθυνση', addressField.value, {required: true, minLength: 5, maxLength: 30, regex: /^[A-Za-zΑ-Ωα-ω](?=.*[A-Za-zΑ-Ωα-ω])(?=.*\s)(?=.*\d)/ })
     ];
     
     for(i = 0; i < fieldsRequired.length; i++) {
@@ -145,16 +146,13 @@ submitButton.addEventListener('click', function() {
     
     for(var error in formErrors) {
         
-        if(formErrors[error].length < 1) {
+        if(formErrors[error].length > 1) {
             
-            console.log('Success');
-        } else {
-            
-            console.log(formErrors[error]);
+            alert(formErrors[error]);
         }
     }
 });
-*/
+
 
 // Validation object that validates a field based on some validation rules
 function Validation (validationField, validationFieldValue, validationRules = {required: false, minLength: null, maxLength: null, regex: null, passwordStrength: false}) {
@@ -205,9 +203,9 @@ function Validation (validationField, validationFieldValue, validationRules = {r
         if(this.rules.passwordStrength == true) {
 
             var tests = {
-                medium: /^(?=.*[A-Za-z])(?=.*\d)/,
-                high: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])/,
-                perfect: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])/
+                medium: /^(?=.*[A-Za-z])(?=.*\d)/, // checks for at least a string character and a numeric character
+                high: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])/, // checks for at least a string, a numeric and a special character
+                perfect: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])/ // checks for at least a lowercase, an uppercase, a numeric and a special character
             }
 
             if (tests.perfect.test(this.fieldValue)) {
