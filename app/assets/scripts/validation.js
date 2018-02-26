@@ -3,7 +3,8 @@ var form = document.getElementById('form'),
     fullNameField = form.fullName,
     emailField = form.email,
     emailField2 = form.email2,
-    passwordField = form.password1,
+    passwordField1 = form.password1,
+    passwrodField2 = form.password2,
     phoneField = form.phone1,
     addressField = form.address;
 
@@ -56,17 +57,45 @@ emailField2.addEventListener('blur', function() {
 });
 
 // A validation run for password triggered on blur
-passwordField.addEventListener('blur', function () {
+passwordField1.addEventListener('blur', function () {
 
     var errorSpan = document.getElementById('password1Error');
 
-    passwordValidation = new Validation('κωδικός πρόσβασης', passwordField.value, {
+    passwordValidation = new Validation('κωδικός πρόσβασης', passwordField1.value, {
         required: true,
         minLength: 8,
         maxLength: 30
     });
 
     errorSpan.innerHTML = passwordValidation.validate();
+});
+
+passwordField1.addEventListener('keyup', function () {
+    
+    var passwordStrengthP = document.getElementById('passwordStrength');
+
+    passwordStrength = new Validation('κωδικός πρόσβασης', passwordField1.value, {
+        passwordStrength: true
+    });
+    
+    passwordStrengthP.innerHTML = passwordStrength.checkPasswordStrength();
+});
+
+// A validation that checks the previous password if it is the same
+passwrodField2.addEventListener('blur', function() {
+    
+    var errorSpan = document.getElementById('password2Error');
+    
+    passwordField1 = form.password1;
+    passwordField2 = form.password2;
+    
+    if(passwordField1.value != passwordField2.value) {
+        
+        errorSpan.innerHTML = 'Το πεδίο δεν ταιριάζει με το πεδίο password που πληκτρολογήσατε παραπάνω.';
+    } else {
+        
+        errorSpan.innerHTML = '';
+    }
 });
 
 
@@ -99,6 +128,7 @@ addressField.addEventListener('blur', function() {
     errorSpan.innerHTML = addressFieldValidation.validate();
 });
 
+/*
 submitButton.addEventListener('click', function() {
     formErrors = new Array();
     fieldsRequired = [
@@ -124,16 +154,18 @@ submitButton.addEventListener('click', function() {
         }
     }
 });
-
+*/
 
 // Validation object that validates a field based on some validation rules
 function Validation (validationField, validationFieldValue, validationRules = {required: false, minLength: null, maxLength: null, regex: null, passwordStrength: false}) {
     
+    // Validation properties
     this.field = validationField;
     this.fieldValue = validationFieldValue;
     this.rules = validationRules;
     this.messages = {
         
+        // Error messages
         requiredMessage : 'Το πεδίο ' + this.field + ' δεν μπορεί να είναι κενό.',
         minLengthMessage : 'Για το πεδίο ' + this.field + ' απαιτούνται τουλάχιστον ' + this.rules.minLength + ' χαρακτήρες.',
         maxLengthMessage : 'Το πεδίο ' + this.field + ' δεν μπορεί να υπερβαίνει τους ' + this.rules.maxLength + ' χαρακτήρες.',
@@ -141,6 +173,7 @@ function Validation (validationField, validationFieldValue, validationRules = {r
     }
     
     
+    // Main Validation method that runs all the validation tests and returns an error message
     this.validate = function () {
         
         var error = '';
@@ -165,7 +198,8 @@ function Validation (validationField, validationFieldValue, validationRules = {r
         return error;
     
     }
-
+    
+    // A Validation method that checks the password strength
     this.checkPasswordStrength = function() {
 
         if(this.rules.passwordStrength == true) {
@@ -177,13 +211,13 @@ function Validation (validationField, validationFieldValue, validationRules = {r
             }
 
             if (tests.perfect.test(this.fieldValue)) {
-                console.log('perfect');
+                return 'πολύ ισχυρό';
             } else if (tests.high.test(this.fieldValue)) {
-                console.log('high');
+                return 'ισχυρό';
             } else if (tests.medium.test(this.fieldValue)) {
-                console.log('medium');
+                return 'μεσαίο';
             } else {
-                console.log('weak');
+                return 'αδύναμο';
             }
         }
     }    

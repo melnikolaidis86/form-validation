@@ -75,4 +75,7 @@
         color: #5a5a5a;
         font-size: .875rem;
         padding: 8px;
+    }.form-field__password-strength {
+        color: #5a5a5a;
+        font-size: .875rem;
     }
